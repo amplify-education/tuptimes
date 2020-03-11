@@ -1,5 +1,5 @@
 const stream = require("stream");
-const pumpify = require('pumpify');
+const pumpify = require("pumpify");
 const split = require("split2");
 const stripColor = require("better-strip-color");
 const chalk = require("chalk");
@@ -55,17 +55,28 @@ class TupSummary {
   }
 
   toString() {
-    return chalk`
+    const groups = Object.entries(
+      this.groups
+    ).map(([name, { time, commands }]) => ({ name, time, commands }))
+    .sort((g1, g2) => (g1.time < g2.time ? 1 : -1))
+
+    let result = chalk`
 {green.bold.underline Tup build finished}
 {bold Total time: ${this.totalTime}s} {gray (${this.totalCommands} commands)}
-${Object.entries(this.groups)
-  .sort((g1, g2) => (g1.time < g2.time ? 1 : -1))
-  .map(
-    ([name, data]) =>
-      chalk`  ‣${name}: ${data.time}s {gray (${data.commands.length} commands)}`
-  )
-  .join("\n")}
 `;
+    for (const {name, time, commands} of groups) {
+      result += chalk`  ‣${name}: ${time}s {gray (${commands.length} commands)}\n`
+    }
+
+    const uncategorized = groups.find(g => g.name === 'uncategorized');
+    if (uncategorized && uncategorized.commands.length > 0) {
+      result += chalk`\n{yellow.underline Uncategorized Commands}\n`
+      for (const command of uncategorized.commands) {
+        result += command + '\n'
+      }
+    }
+
+    return result;
   }
 }
 
@@ -81,7 +92,7 @@ class TupLogSummaryStream extends stream.Transform {
         callback();
       }
     });
-    this.state = 'pending';
+    this.state = "pending";
     this.config = config;
   }
 
@@ -113,15 +124,11 @@ class TupLogSummaryStream extends stream.Transform {
  *
  */
 function createSummaryStream(rawTupLogStream, config) {
-  return pumpify(
-    rawTupLogStream,
-    split(),
-    new TupLogSummaryStream(config)
-  );
+  return pumpify(rawTupLogStream, split(), new TupLogSummaryStream(config));
 }
 
 module.exports = {
-    TupSummary,
-    TupLogSummaryStream,
-    createSummaryStream
-}
+  TupSummary,
+  TupLogSummaryStream,
+  createSummaryStream
+};

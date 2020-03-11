@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "tap test",
-    "prettify": "prettier --write **/*.js"
+    "prettify": "prettier --write *.js **/*.js"
   },
   "keywords": [],
   "author": "",

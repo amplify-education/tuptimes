@@ -14,6 +14,9 @@
 [1mTotal time: 1.026s[22m [90m(2 commands)[39m
   ‣final output: 1.014s [90m(1 commands)[39m
   ‣uncategorized: 0.012s [90m(1 commands)[39m
+
+[33m[4mUncategorized Commands[24m[39m
+cp input intermediate
 [[07m [0mtup ] [0.001s] Reading in new environment variables...
 [[07m t[0mup ] [0.002s] No Tupfiles to parse.
 [[07m tu[0mp ] [0.002s] No files to delete.
@@ -27,6 +30,9 @@
 [1mTotal time: 1.023s[22m [90m(2 commands)[39m
   ‣final output: 1.014s [90m(1 commands)[39m
   ‣uncategorized: 0.009s [90m(1 commands)[39m
+
+[33m[4mUncategorized Commands[24m[39m
+cp input intermediate
 [[07m [0mtup ] [0.002s] Reading in new environment variables...
 [[07m t[0mup ] [0.002s] No Tupfiles to parse.
 [[07m tu[0mp ] [0.002s] No files to delete.
@@ -39,3 +45,6 @@
 [1mTotal time: 1.024s[22m [90m(2 commands)[39m
   ‣final output: 1.014s [90m(1 commands)[39m
   ‣uncategorized: 0.01s [90m(1 commands)[39m
+
+[33m[4mUncategorized Commands[24m[39m
+cp input intermediate
