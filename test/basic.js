@@ -3,6 +3,7 @@ const cp = require("child_process");
 const path = require("path");
 const fs = require("fs");
 const { createSummaryStream } = require("..");
+const stripColor = require("better-strip-color");
 
 const fixtureDir = path.join(__dirname, "fixture");
 const fixtures = fs
@@ -19,7 +20,7 @@ for (const fixture of fixtures) {
       fs.writeFileSync(expectedFile, output);
       console.log("Updated " + expectedFile);
     }
-    t.equal(output, expected);
+    t.equal(stripColor(output), stripColor(expected));
   });
 }
 
