@@ -1,0 +1,49 @@
+#!/usr/bin/env node
+const fs = require("fs");
+const stream = require("stream");
+const split = require("split2");
+const assert = require('assert')
+const {createSummaryStream} = require('..')
+
+/**
+ * Parse config from either .tuptimesrc or command line arguments.
+ *
+ * Expects:
+ * {
+ *   "groups": [{"name": "a label", pattern: "a regexp"}, ...]
+ * }
+ *
+ * Or:
+ * tuptimes.js --groups "a label:a regexp" --groups "another label:regexp" ...
+ */
+function getConfig() {
+  const config = require("rc")("tuptimes", {
+    groups: []
+  });
+  const groups = Array.isArray(config.groups) ? config.groups : [config.groups];
+  return {
+    ...config,
+    groups: groups.map(g => {
+      if (typeof g === 'string') {
+        const [name, pattern] = g.split(':');
+        g = {name, pattern}
+      }
+      assert(typeof g.name === 'string', 'Each group must have a "name" property')
+      g.pattern = new RegExp(g.pattern);
+      return g;
+    })
+  }
+}
+
+const config = getConfig();
+
+const inputStream = config._[0]
+  ? fs.createReadStream(config._[0], "utf8")
+  : process.stdin;
+
+createSummaryStream(inputStream, config)
+  .on('error', err => {
+    console.error(err);
+    process.exit(1);
+  })
+  .pipe(process.stdout)

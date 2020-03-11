@@ -1,0 +1,46 @@
+[[07m[0m tup ] [0.000s] Scanning filesystem...
+[[07m [0mtup ] [0.002s] Reading in new environment variables...
+[[07m t[0mup ] [0.002s] No Tupfiles to parse.
+[[07m tu[0mp ] [0.002s] No files to delete.
+[[07m tup[0m ] [0.002s] Executing Commands...
+ ~50% 1) [0.010s] [34mcp input intermediate[0m
+ 100% 2) [1.014s] [34mcp intermediate output && sleep 1[0m
+[[07;32m tup [0m] [1.056s] Partial update complete: skipped 1 commands.
+[[07m[0m tup ] [0.000s] Scanning filesystem...
+
+[32m[1m[4mTup build finished[24m[22m[39m
+[1mTotal time: 1.024s[22m [90m(2 commands)[39m
+  ‣final output: 1.014s [90m(1 commands)[39m
+  ‣uncategorized: 0.01s [90m(1 commands)[39m
+[[07m [0mtup ] [0.001s] Reading in new environment variables...
+[[07m t[0mup ] [0.002s] No Tupfiles to parse.
+[[07m tu[0mp ] [0.002s] No files to delete.
+[[07m tup[0m ] [0.002s] Executing Commands...
+ ~50% 1) [0.010s] [34mcp input intermediate[0m
+[[07m[0m tup ] [0.000s] Scanning filesystem...
+
+[32m[1m[4mTup build finished[24m[22m[39m
+[1mTotal time: 0.01s[22m [90m(1 commands)[39m
+  ‣uncategorized: 0.01s [90m(1 commands)[39m
+[[07m [0mtup ] [0.002s] Reading in new environment variables...
+[[07m t[0mup ] [0.002s] No Tupfiles to parse.
+[[07m tu[0mp ] [0.002s] No files to delete.
+[[07m tup[0m ] [0.002s] Executing Commands...
+ ~50% 1) [0.009s] [34mcp input intermediate[0m
+[[07m[0m tup ] [0.000s] Scanning filesystem...
+
+[32m[1m[4mTup build finished[24m[22m[39m
+[1mTotal time: 0.009s[22m [90m(1 commands)[39m
+  ‣uncategorized: 0.009s [90m(1 commands)[39m
+[[07m [0mtup ] [0.002s] Reading in new environment variables...
+[[07m t[0mup ] [0.002s] No Tupfiles to parse.
+[[07m tu[0mp ] [0.002s] No files to delete.
+[[07m tup[0m ] [0.002s] Executing Commands...
+ ~50% 1) [0.010s] [34mcp input intermediate[0m
+ 100% 2) [1.017s] [34mcp intermediate output && sleep 1[0m
+[[07;32m tup [0m] [1.057s] Partial update complete: skipped 1 commands.
+
+[32m[1m[4mTup build finished[24m[22m[39m
+[1mTotal time: 1.027s[22m [90m(2 commands)[39m
+  ‣final output: 1.017s [90m(1 commands)[39m
+  ‣uncategorized: 0.01s [90m(1 commands)[39m

@@ -1,0 +1,28 @@
+{
+  "name": "@desmos/tuptimes",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "test": "test",
+    "bin": "bin"
+  },
+  "scripts": {
+    "test": "tap test",
+    "prettify": "prettier --write **/*.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "better-strip-color": "^1.0.2",
+    "chalk": "^3.0.0",
+    "pumpify": "^2.0.1",
+    "rc": "^1.2.8",
+    "split2": "^3.1.1"
+  },
+  "devDependencies": {
+    "prettier": "^1.19.1",
+    "tap": "^14.10.6"
+  },
+  "description": ""
+}
