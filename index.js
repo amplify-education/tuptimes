@@ -62,10 +62,10 @@ class TupSummary {
 
     let result = chalk`
 {green.bold.underline Tup build finished}
-{bold Total time: ${this.totalTime}s} {gray (${this.totalCommands} commands)}
+{bold Total time: ${this.totalTime.toFixed(3)}s} {gray (${this.totalCommands} commands)}
 `;
     for (const {name, time, commands} of groups) {
-      result += chalk`  ‣${name}: ${time}s {gray (${commands.length} commands)}\n`
+      result += chalk`  ‣${name}: ${time.toFixed(3)}s {gray (${commands.length} commands)}\n`
     }
 
     const uncategorized = groups.find(g => g.name === 'uncategorized');
