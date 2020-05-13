@@ -11,7 +11,7 @@
 [[07m[0m tup ] [0.000s] Scanning filesystem...
 
 [32m[1m[4mTup build finished[24m[22m[39m
-[1mTotal time: 1.026s[22m [90m(2 commands)[39m
+[1mTotal time: 1.026s[22m [1mWall time: 1.000s[22m [90m(2 commands)[39m
   ‣final output: 1.014s [90m(1 commands)[39m
   ‣uncategorized: 0.012s [90m(1 commands)[39m
 
@@ -27,7 +27,7 @@ cp input intermediate
 [[07m[0m tup ] [0.000s] Scanning filesystem...
 
 [32m[1m[4mTup build finished[24m[22m[39m
-[1mTotal time: 1.023s[22m [90m(2 commands)[39m
+[1mTotal time: 1.023s[22m [1mWall time: 1.000s[22m [90m(2 commands)[39m
   ‣final output: 1.014s [90m(1 commands)[39m
   ‣uncategorized: 0.009s [90m(1 commands)[39m
 
@@ -42,7 +42,7 @@ cp input intermediate
 [[07;32m tup [0m] [1.054s] Partial update complete: skipped 1 commands.
 
 [32m[1m[4mTup build finished[24m[22m[39m
-[1mTotal time: 1.024s[22m [90m(2 commands)[39m
+[1mTotal time: 1.024s[22m [1mWall time: 1.000s[22m [90m(2 commands)[39m
   ‣final output: 1.014s [90m(1 commands)[39m
   ‣uncategorized: 0.010s [90m(1 commands)[39m
 

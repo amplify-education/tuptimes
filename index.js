@@ -10,6 +10,7 @@ class TupSummary {
     this.totalTime = 0;
     this.totalCommands = 0;
     this.groups = {};
+    this.start = Date.now();
   }
 
   addCommand(line) {
@@ -60,9 +61,11 @@ class TupSummary {
     ).map(([name, { time, commands }]) => ({ name, time, commands }))
     .sort((g1, g2) => (g1.time < g2.time ? 1 : -1))
 
+    const wallTime = (Date.now() - this.start) / 1000;
+
     let result = chalk`
 {green.bold.underline Tup build finished}
-{bold Total time: ${this.totalTime.toFixed(3)}s} {gray (${this.totalCommands} commands)}
+{bold Total time: ${this.totalTime.toFixed(3)}s} {bold Wall time: ${wallTime.toFixed(3)}s} {gray (${this.totalCommands} commands)}
 `;
     for (const {name, time, commands} of groups) {
       result += chalk`  ‣${name}: ${time.toFixed(3)}s {gray (${commands.length} commands)}\n`

@@ -32,6 +32,8 @@ function runTupTime(fixture) {
   for (const g of config.groups) {
     g.pattern = new RegExp(g.pattern);
   }
+  let now = 0;
+  Date.now = () => now += 1000;
   const stream = createSummaryStream(fs.createReadStream(fixtureFile), config);
   return new Promise((resolve, reject) => {
     let data = "";
