@@ -15,7 +15,10 @@ class TupSummary {
 
   addCommand(line) {
     const parsed = this.parseCommandLine(line);
-    if (!parsed) return;
+    if (!parsed) return {
+      highlighted: line
+    };
+
     const { time, directory, command, group } = parsed;
     this.totalTime += time;
     this.totalCommands++;
@@ -27,22 +30,26 @@ class TupSummary {
     }
     this.groups[group].time += time;
     this.groups[group].commands.push(command);
+    return parsed;
   }
 
   parseCommandLine(line) {
+    const stripped = stripColor(line);
     // Parse lines from tup log corresponding to execution of a command:
     // ~50% 1) [0.010s] cp blah.js build/blah.js
     // 100% 2) [1.017s] cp blah2.js build/blah2.js
     //                progress %....    [   time    ]   dir.....:   cmd
     const match = /\s+~?\d+%\s+\d+\)\s+\[([0-9.]+)s\]\s+([^:]*:)?\s*(.*)/.exec(
-      line
+      stripped
     );
     if (!match) return undefined;
 
     let group;
+    let highlighted = chalk`{yellow ${line}}`;
     for (const g of this.options.groups) {
-      if (g.pattern.test(line)) {
+      if (g.pattern.test(stripped)) {
         group = g.name;
+        highlighted = line.replace(g.pattern, (s) => chalk`{blue.bold.underline ${s}}`)
       }
     }
     group = group || "uncategorized";
@@ -51,7 +58,8 @@ class TupSummary {
       time: parseFloat(match[1]),
       directory: match[2],
       command: match[3],
-      group
+      group,
+      highlighted
     };
   }
 
@@ -100,22 +108,24 @@ class TupLogSummaryStream extends stream.Transform {
   }
 
   handleLine(line, callback) {
-    this.push(line + "\n");
-
-    line = stripColor(line);
-
-    if (/\[ tup \] \[.*\] Executing Commands/.test(line)) {
+    const stripped = stripColor(line);
+    if (/\[ tup \] \[.*\] Executing Commands/.test(stripped)) {
+      this.push(line + "\n");
       this.state = "executing";
       if (this.tupJob) {
         this.push(this.tupJob.toString());
       }
       this.tupJob = new TupSummary(this.config);
-    } else if (this.state === "executing" && /(\[ tup \])/.test(line)) {
+    } else if (this.state === "executing" && /(\[ tup \])/.test(stripped)) {
+      this.push(chalk`{gray ${line}}` + "\n");
       this.push(this.tupJob.toString());
       this.state = "pending";
       this.tupJob = undefined;
     } else if (this.state === "executing") {
-      this.tupJob.addCommand(line);
+      const {highlighted} = this.tupJob.addCommand(line);
+      this.push(highlighted + "\n");
+    } else {
+      this.push(chalk`{gray ${line}}` + "\n");
     }
     callback();
   }
